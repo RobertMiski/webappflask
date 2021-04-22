@@ -1,0 +1,70 @@
+<html>
+    <head>
+      <title>Booking System</title>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+      <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+      <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <script>
+      $(function() {
+          $( ".dtpick" ).datepicker();
+      });
+      </script>
+  
+    </head>
+    <body>
+        <nav >
+            <div class="nav-wrapper black">
+                
+                  
+                  <ul id="nav-mobile">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+            {% if current_user.is_anonymous %}
+            <li><a class="white-text" href="{{ url_for('login') }}">Login</a></li>
+            {% else %}
+            <li><a class="white-text" href="{{ url_for('logout')}}">Logout</a></li>
+            {% endif %}
+           <li> <a class="white-text" href="{{ url_for('book')}}">Book Meeting</a> </li>
+           <li> <a class="white-text" href="{{ url_for('cancelbooking')}}">Cancel Booking</a> </li>
+           <li> <a class="white-text" href="{{ url_for('roomavailable')}}">Room Availability</a> </li>
+           <li> <a class="white-text" href="{{ url_for('roomoccupation')}}">Room Status</a> </li>
+           <li> <a class="white-text" href="{{ url_for('meetingbooker')}}">Meetings</a> </li>
+           <li> <a class="white-text" href="{{ url_for('meetingparticipants')}}">Participants</a> </li>
+           <li> <a class="white-text" href="{{ url_for('costs')}}">Cost Accrued</a> </li>
+<!--            <li> <a class="white-text" href="{{ url_for('addteam')}}">Add Team</a> </li> for admin
+           <li> <a class="white-text" href="{{ url_for('adduser')}}">Add User</a> </li>
+           <li> <a class="white-text" href="{{ url_for('deleteteam')}}">Delete Team</a> </li>
+           <li> <a class="white-text" href="{{ url_for('deleteuser')}}">Delete User</a> </li> -->
+            {% if current_user.is_authenticated %}
+            <li><div align="right">Log in as: {{current_user.fullname}}</div></li>
+            {% endif %}
+                  </ul>
+                  <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                </div>
+              </nav>
+            
+        </div>
+        
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, options);
+  });
+    </script>
+    </body>
+</html>

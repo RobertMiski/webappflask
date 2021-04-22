@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>Costs accrued by teams during {{startdate}} ~ {{enddate}}:</h1>
+<table border="1" cellpadding=3>
+    <tr>
+        <th>Team</th>
+        <th>Cost Accrued</th>
+    </tr>
+{% for teamcost in teamcosts %}
+    <tr>
+        <td>{{ teamcost.teamName }}</td>
+        <td>{{ teamcost.total }}</td> 
+    </tr>
+{% endfor %}
+</table>
+</div>
+
+{% endblock %}
